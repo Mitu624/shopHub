@@ -40,7 +40,7 @@
       min-height: 100vh;
     }
 
-    /* Header */
+    /* ===== IMPROVED MOBILE-RESPONSIVE HEADER ===== */
     header {
       background: white;
       box-shadow: var(--shadow);
@@ -53,32 +53,55 @@
     .nav-container {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 1rem 2rem;
+      padding: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      font-size: 1.75rem;
+      gap: 0.5rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--primary);
       text-decoration: none;
+      z-index: 1001;
     }
 
     .logo-icon {
       background: var(--gradient-primary);
-      padding: 0.5rem;
-      border-radius: 12px;
+      padding: 0.4rem;
+      border-radius: 10px;
       color: white;
+      font-size: 0.9rem;
+    }
+
+    /* Mobile Menu Button */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: 0.3s;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1rem;
       align-items: center;
     }
 
@@ -86,16 +109,14 @@
       color: var(--dark);
       text-decoration: none;
       font-weight: 500;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.75rem;
       border-radius: 8px;
       transition: all 0.3s ease;
+      font-size: 0.9rem;
+      white-space: nowrap;
     }
 
-    .nav-link:hover {
-      color: var(--primary);
-      background: rgba(37, 99, 235, 0.1);
-    }
-
+    .nav-link:hover,
     .nav-link.active {
       color: var(--primary);
       background: rgba(37, 99, 235, 0.1);
@@ -104,12 +125,12 @@
     /* Page Header */
     .page-header {
       background: var(--gradient-primary);
-      padding: 8rem 2rem 4rem;
+      padding: 8rem 1rem 4rem;
       text-align: center;
       color: white;
       position: relative;
       overflow: hidden;
-      margin-top: 80px;
+      margin-top: 70px;
     }
 
     .page-header::before {
@@ -130,15 +151,17 @@
     }
 
     .page-title {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       font-weight: 800;
       margin-bottom: 1rem;
+      line-height: 1.2;
     }
 
     .page-subtitle {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       opacity: 0.9;
       margin-bottom: 2rem;
+      line-height: 1.6;
     }
 
     .back-link {
@@ -162,45 +185,47 @@
 
     /* Deals Section */
     .deals-section {
-      padding: 4rem 2rem;
+      padding: 3rem 1rem;
       max-width: 1400px;
       margin: 0 auto;
     }
 
     .deals-header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     .deals-title {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--dark);
       margin-bottom: 1rem;
+      line-height: 1.2;
     }
 
     .deals-subtitle {
-      font-size: 1.125rem;
+      font-size: 1rem;
       color: var(--gray);
       max-width: 600px;
       margin: 0 auto;
+      line-height: 1.6;
     }
 
     .deals-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
 
     .deal-card {
       background: white;
-      border-radius: 20px;
-      padding: 2rem;
+      border-radius: 16px;
+      padding: 1.5rem;
       box-shadow: var(--shadow);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      border: 2px solid transparent;
+      border: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .deal-card::before {
@@ -209,80 +234,92 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 5px;
+      height: 4px;
       background: var(--gradient-primary);
     }
 
     .deal-card:hover {
-      transform: translateY(-10px) scale(1.02);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
-      border-color: var(--primary);
     }
 
-    .discount-badge {
+    .deal-badge {
       position: absolute;
       top: 1rem;
       right: 1rem;
       background: var(--error);
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 50px;
-      font-size: 0.875rem;
+      font-size: 0.8rem;
       font-weight: 600;
       z-index: 2;
     }
 
-    .deal-image {
+    .discount-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--success);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .product-image {
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: contain;
       border-radius: 12px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       transition: all 0.3s ease;
     }
 
-    .deal-card:hover .deal-image {
+    .deal-card:hover .product-image {
       transform: scale(1.05);
     }
 
-    .deal-info {
+    .product-info {
       padding: 0.5rem 0;
     }
 
-    .deal-name {
-      font-size: 1.25rem;
+    .product-name {
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--dark);
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       line-height: 1.4;
     }
 
     .price-container {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
     }
 
     .current-price {
-      font-size: 1.75rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      color: var(--primary);
+      color: var(--error);
     }
 
     .original-price {
-      font-size: 1.25rem;
+      font-size: 1rem;
       color: var(--gray);
       text-decoration: line-through;
     }
 
-    .savings {
-      color: var(--error);
+    .discount {
+      font-size: 0.9rem;
+      color: var(--success);
       font-weight: 600;
-      font-size: 0.875rem;
     }
 
-    .deal-rating {
+    .product-rating {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -291,12 +328,12 @@
 
     .stars {
       color: var(--secondary);
-      font-size: 1.1rem;
+      font-size: 0.9rem;
     }
 
     .rating-count {
       color: var(--gray);
-      font-size: 0.875rem;
+      font-size: 0.8rem;
     }
 
     .buy-btn {
@@ -304,8 +341,8 @@
       background: var(--gradient-primary);
       color: white;
       border: none;
-      padding: 1rem 2rem;
-      border-radius: 12px;
+      padding: 0.875rem 1.5rem;
+      border-radius: 10px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -313,73 +350,86 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     .buy-btn:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
     }
 
-    /* Countdown Timer */
-    .countdown {
+    .time-left {
+      text-align: center;
+      color: var(--error);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Categories */
+    .categories {
       background: var(--darker);
-      padding: 2rem;
-      border-radius: 15px;
+      padding: 3rem 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .category-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
       text-align: center;
       color: white;
-      margin-bottom: 3rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .countdown-title {
+    .category-card:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .category-icon {
       font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--secondary);
+    }
+
+    .category-name {
+      font-size: 0.9rem;
       font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .timer {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      font-size: 2rem;
-      font-weight: 700;
-    }
-
-    .timer-unit {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 1rem;
-      border-radius: 10px;
-      min-width: 80px;
-    }
-
-    .timer-label {
-      font-size: 0.875rem;
-      opacity: 0.8;
-      margin-top: 0.5rem;
     }
 
     /* Footer */
     footer {
       background: var(--darker);
       color: white;
-      padding: 4rem 2rem 2rem;
-      margin-top: 4rem;
+      padding: 3rem 1rem 2rem;
+      margin-top: 3rem;
     }
 
     .footer-content {
       max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
 
     .footer-column h3 {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .footer-links {
@@ -387,13 +437,14 @@
     }
 
     .footer-links li {
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
 
     .footer-links a {
       color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
       transition: color 0.3s ease;
+      font-size: 0.9rem;
     }
 
     .footer-links a:hover {
@@ -407,28 +458,143 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
       color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
     }
 
+    /* ===== MOBILE MENU STYLES ===== */
     @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: white;
+        flex-direction: column;
+        gap: 0;
+        transition: left 0.3s ease;
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+        z-index: 999;
+        overflow-y: auto;
+      }
+      
+      .nav-links.active {
+        left: 0;
+      }
+      
+      .nav-link {
+        padding: 1rem;
+        width: 100%;
+        text-align: center;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .page-header {
+        padding: 6rem 1rem 3rem;
+        margin-top: 60px;
+      }
+      
       .page-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
+      }
+      
+      .page-subtitle {
+        font-size: 1rem;
       }
       
       .deals-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
       }
       
       .deal-card {
-        padding: 1.5rem;
+        padding: 1.25rem;
       }
       
-      .timer {
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+      
+      .category-card {
+        padding: 1.25rem 0.75rem;
+      }
+      
+      .category-icon {
+        font-size: 1.25rem;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .nav-container {
+        padding: 1rem 2rem;
+      }
+      
+      .logo {
         font-size: 1.5rem;
       }
       
-      .timer-unit {
-        min-width: 60px;
-        padding: 0.75rem;
+      .nav-links {
+        gap: 1.5rem;
+      }
+      
+      .nav-link {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+      }
+      
+      .page-header {
+        padding: 8rem 2rem 4rem;
+      }
+      
+      .page-title {
+        font-size: 3.5rem;
+      }
+      
+      .page-subtitle {
+        font-size: 1.25rem;
+      }
+      
+      .deals-section {
+        padding: 4rem 2rem;
+      }
+      
+      .deals-title {
+        font-size: 2.5rem;
+      }
+      
+      .deals-grid {
+        gap: 2rem;
+      }
+      
+      .categories-grid {
+        gap: 1.5rem;
+      }
+    }
+
+    /* ===== TOUCH-FRIENDLY IMPROVEMENTS ===== */
+    @media (hover: none) {
+      .deal-card:hover {
+        transform: none;
+      }
+      
+      .buy-btn:hover {
+        transform: none;
+      }
+      
+      .category-card:hover {
+        transform: none;
+      }
+      
+      .back-link:hover {
+        transform: none;
       }
     }
   </style>
@@ -445,12 +611,19 @@
         ShopHub
       </a>
       
-      <nav class="nav-links">
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <nav class="nav-links" id="navLinks">
         <a href="index.html" class="nav-link">Home</a>
         <a href="categories.html" class="nav-link">Categories</a>
         <a href="electronics.html" class="nav-link">Electronics</a>
         <a href="home-living.html" class="nav-link">Home & Living</a>
         <a href="fashion.html" class="nav-link">Fashion</a>
+        <a href="beauty.html" class="nav-link">Beauty & Health</a>
         <a href="deals.html" class="nav-link active">Hot Deals</a>
       </nav>
     </div>
@@ -459,8 +632,8 @@
   <!-- Page Header -->
   <section class="page-header">
     <div class="page-header-content">
-      <h1 class="page-title">Hot Deals 🔥</h1>
-      <p class="page-subtitle">Limited time offers and exclusive discounts on premium products</p>
+      <h1 class="page-title">Hot Deals</h1>
+      <p class="page-subtitle">Limited time offers and exclusive discounts on top products</p>
       <a href="index.html" class="back-link">
         <i class="fas fa-arrow-left"></i>
         Back to Home
@@ -468,29 +641,53 @@
     </div>
   </section>
 
-  <!-- Countdown Timer -->
-  <section class="deals-section">
-    <div class="countdown">
-      <div class="countdown-title">Flash Sale Ends In:</div>
-      <div class="timer" id="countdown-timer">
-        <div class="timer-unit">
-          <span id="hours">24</span>
-          <div class="timer-label">Hours</div>
+  <!-- Categories -->
+  <section class="categories">
+    <div class="categories-grid">
+      <a href="#electronics" class="category-card">
+        <div class="category-icon">
+          <i class="fas fa-laptop"></i>
         </div>
-        <div class="timer-unit">
-          <span id="minutes">00</span>
-          <div class="timer-label">Minutes</div>
+        <div class="category-name">Electronics</div>
+      </a>
+      <a href="#home" class="category-card">
+        <div class="category-icon">
+          <i class="fas fa-home"></i>
         </div>
-        <div class="timer-unit">
-          <span id="seconds">00</span>
-          <div class="timer-label">Seconds</div>
+        <div class="category-name">Home & Living</div>
+      </a>
+      <a href="#fashion" class="category-card">
+        <div class="category-icon">
+          <i class="fas fa-tshirt"></i>
         </div>
-      </div>
+        <div class="category-name">Fashion</div>
+      </a>
+      <a href="#beauty" class="category-card">
+        <div class="category-icon">
+          <i class="fas fa-spa"></i>
+        </div>
+        <div class="category-name">Beauty</div>
+      </a>
+      <a href="#automotive" class="category-card">
+        <div class="category-icon">
+          <i class="fas fa-car"></i>
+        </div>
+        <div class="category-name">Automotive</div>
+      </a>
+      <a href="#flash" class="category-card">
+        <div class="category-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div class="category-name">Flash Sales</div>
+      </a>
     </div>
+  </section>
 
+  <!-- Deals Section -->
+  <section class="deals-section">
     <div class="deals-header">
       <h2 class="deals-title">Today's Best Deals</h2>
-      <p class="deals-subtitle">Don't miss out on these incredible limited-time offers</p>
+      <p class="deals-subtitle">Don't miss out on these limited-time offers with huge discounts</p>
     </div>
     
     <div class="deals-grid" id="dealsList"></div>
@@ -537,143 +734,155 @@
   </footer>
 
   <script>
-    const deals = [
+    // Mobile menu functionality
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-container')) {
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Deals data
+    const hotDeals = [
       {
-        name: "Wireless Bluetooth Earbuds - Noise Cancelling",
-        image: "https://images.unsplash.com/photo-1590658165737-15a047b8b5e3?w=400&h=300&fit=crop",
-        originalPrice: "$99.99",
-        currentPrice: "$49.99",
-        discount: "50% OFF",
-        rating: 4.5,
-        source: "Amazon",
-        link: "https://www.amazon.com/dp/wireless-earbuds-deal-link",
-        savings: "Save $50"
-      },
-      {
-        name: "Smart Fitness Watch with Heart Rate Monitor",
-        image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&h=300&fit=crop",
-        originalPrice: "$199.99",
-        currentPrice: "$129.99",
-        discount: "35% OFF",
-        rating: 4.7,
-        source: "Best Buy",
-        link: "https://www.bestbuy.com/site/smart-watch-deal-link",
-        savings: "Save $70"
-      },
-      {
-        name: "Professional Hair Dryer - Ionic Technology",
-        image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=300&fit=crop",
-        originalPrice: "$89.99",
-        currentPrice: "$59.99",
-        discount: "33% OFF",
-        rating: 4.6,
-        source: "Ulta",
-        link: "https://www.ulta.com/p/hair-dryer-deal-link",
-        savings: "Save $30"
-      },
-      {
-        name: "Kitchen Air Fryer - 6 Quart Digital",
-        image: "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=400&h=300&fit=crop",
+        name: "Wireless Earbuds - Noise Cancelling",
         originalPrice: "$129.99",
         currentPrice: "$79.99",
         discount: "38% OFF",
-        rating: 4.4,
-        source: "Walmart",
-        link: "https://www.walmart.com/ip/air-fryer-deal-link",
-        savings: "Save $50"
+        image: "https://images.unsplash.com/photo-1590658165737-15a047b8b5e0?w=400&h=300&fit=crop",
+        rating: 4.6,
+        source: "Amazon",
+        link: "https://www.amazon.com/dp/wireless-earbuds-deal-link",
+        badge: "Limited Time",
+        timeLeft: "6h 23m left"
       },
       {
-        name: "Men's Running Shoes - Latest Model",
-        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",
-        originalPrice: "$140.00",
-        currentPrice: "$89.99",
-        discount: "36% OFF",
-        rating: 4.8,
-        source: "Nike",
-        link: "https://www.nike.com/t/running-shoes-deal-link",
-        savings: "Save $50"
-      },
-      {
-        name: "Designer Handbag - Leather Crossbody",
-        image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=300&fit=crop",
-        originalPrice: "$299.99",
-        currentPrice: "$199.99",
-        discount: "33% OFF",
+        name: "Smart Watch - Fitness Tracker",
+        originalPrice: "$199.99",
+        currentPrice: "$129.99",
+        discount: "35% OFF",
+        image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&h=300&fit=crop",
         rating: 4.5,
-        source: "Nordstrom",
-        link: "https://www.nordstrom.com/s/handbag-deal-link",
-        savings: "Save $100"
-      },
-      {
-        name: "4K Smart TV - 55 inch Ultra HD",
-        image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=300&fit=crop",
-        originalPrice: "$599.99",
-        currentPrice: "$399.99",
-        discount: "33% OFF",
-        rating: 4.7,
         source: "Best Buy",
-        link: "https://www.bestbuy.com/site/4k-tv-deal-link",
-        savings: "Save $200"
+        link: "https://www.bestbuy.com/site/smart-watch-deal-link",
+        badge: "Flash Sale",
+        timeLeft: "2h 45m left"
       },
       {
-        name: "Vitamin C Serum - Anti-Aging Skincare",
-        image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=300&fit=crop",
+        name: "Air Purifier - HEPA Filter",
+        originalPrice: "$149.99",
+        currentPrice: "$99.99",
+        discount: "33% OFF",
+        image: "https://images.unsplash.com/photo-1584473457409-ae5c91d7d8b1?w=400&h=300&fit=crop",
+        rating: 4.7,
+        source: "Walmart",
+        link: "https://www.walmart.com/ip/air-purifier-deal-link",
+        badge: "Today Only",
+        timeLeft: "8h 12m left"
+      },
+      {
+        name: "Gaming Mouse - RGB Lighting",
+        originalPrice: "$79.99",
+        currentPrice: "$49.99",
+        discount: "38% OFF",
+        image: "https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=300&fit=crop",
+        rating: 4.4,
+        source: "Newegg",
+        link: "https://www.newegg.com/p/gaming-mouse-deal-link",
+        badge: "Hot Deal",
+        timeLeft: "12h 30m left"
+      },
+      {
+        name: "Bluetooth Speaker - Waterproof",
+        originalPrice: "$89.99",
+        currentPrice: "$59.99",
+        discount: "33% OFF",
+        image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop",
+        rating: 4.6,
+        source: "Target",
+        link: "https://www.target.com/p/bluetooth-speaker-deal-link",
+        badge: "Weekend Sale",
+        timeLeft: "1d 4h left"
+      },
+      {
+        name: "Electric Kettle - Temperature Control",
+        originalPrice: "$69.99",
+        currentPrice: "$44.99",
+        discount: "36% OFF",
+        image: "https://images.unsplash.com/photo-1593369196680-dde0dd6fc3ff?w=400&h=300&fit=crop",
+        rating: 4.5,
+        source: "Bed Bath & Beyond",
+        link: "https://www.bedbathandbeyond.com/store/product/electric-kettle-deal-link",
+        badge: "Clearance",
+        timeLeft: "3d left"
+      },
+      {
+        name: "Yoga Mat - Non-Slip Premium",
+        originalPrice: "$49.99",
+        currentPrice: "$29.99",
+        discount: "40% OFF",
+        image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop",
+        rating: 4.7,
+        source: "Amazon",
+        link: "https://www.amazon.com/dp/yoga-mat-deal-link",
+        badge: "Prime Deal",
+        timeLeft: "5h 18m left"
+      },
+      {
+        name: "Car Phone Mount - Fast Charging",
         originalPrice: "$39.99",
         currentPrice: "$24.99",
         discount: "38% OFF",
-        rating: 4.6,
-        source: "Sephora",
-        link: "https://www.sephora.com/product/vitamin-c-serum-deal-link",
-        savings: "Save $15"
+        image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=300&fit=crop",
+        rating: 4.3,
+        source: "iOttie",
+        link: "https://www.iottie.com/Product/List?category=Car-Mounts",
+        badge: "Limited Stock",
+        timeLeft: "18h 42m left"
       }
     ];
 
     const dealsList = document.getElementById('dealsList');
-    deals.forEach(deal => {
+    hotDeals.forEach(deal => {
       const card = document.createElement('div');
       card.classList.add('deal-card');
       card.innerHTML = `
+        <div class="deal-badge">${deal.badge}</div>
         <div class="discount-badge">${deal.discount}</div>
-        <img src="${deal.image}" alt="${deal.name}" class="deal-image">
-        <div class="deal-info">
-          <h3 class="deal-name">${deal.name}</h3>
+        <img src="${deal.image}" alt="${deal.name}" class="product-image">
+        <div class="product-info">
+          <h3 class="product-name">${deal.name}</h3>
           <div class="price-container">
             <div class="current-price">${deal.currentPrice}</div>
             <div class="original-price">${deal.originalPrice}</div>
-            <div class="savings">${deal.savings}</div>
           </div>
-          <div class="deal-rating">
+          <div class="product-rating">
             <div class="stars">${'★'.repeat(Math.floor(deal.rating))}${'☆'.repeat(5 - Math.floor(deal.rating))}</div>
             <span class="rating-count">${deal.rating}</span>
           </div>
           <button class="buy-btn" onclick="window.open('${deal.link}', '_blank')">
             <i class="fas fa-bolt"></i>
-            Grab Deal on ${deal.source}
+            Buy on ${deal.source}
           </button>
+          <div class="time-left">${deal.timeLeft}</div>
         </div>
       `;
       dealsList.appendChild(card);
     });
-
-    // Countdown Timer
-    function updateCountdown() {
-      const now = new Date();
-      const endTime = new Date(now);
-      endTime.setHours(23, 59, 59, 999); // Set to end of day
-      
-      const timeLeft = endTime - now;
-      
-      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-      
-      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
   </script>
 </body>
 </html>
