@@ -1,6 +1,7 @@
 backend:
-  name: git-gateway
-  branch: main   # change if your GitHub branch is different
+  name: github
+  repo: Mitu/shopHub   
+  branch: main
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
