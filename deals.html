@@ -226,6 +226,9 @@
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;                    /* ADD THIS LINE */
+      flex-direction: column;           /* ADD THIS LINE */
+      height: 100%;                     /* ADD THIS LINE */
     }
 
     .deal-card::before {
@@ -284,6 +287,9 @@
 
     .product-info {
       padding: 0.5rem 0;
+      display: flex;                    /* ADD THIS LINE */
+      flex-direction: column;           /* ADD THIS LINE */
+      flex-grow: 1;                     /* ADD THIS LINE */
     }
 
     .product-name {
@@ -292,6 +298,11 @@
       color: var(--dark);
       margin-bottom: 0.5rem;
       line-height: 1.4;
+      min-height: 50px;                 
+      display: -webkit-box;             
+      -webkit-line-clamp: 2;            
+      -webkit-box-orient: vertical;     
+      overflow: hidden;                 
     }
 
     .price-container {
@@ -351,6 +362,7 @@
       justify-content: center;
       gap: 0.5rem;
       font-size: 0.9rem;
+      margin-top: auto;
     }
 
     .buy-btn:hover {
@@ -886,3 +898,4 @@
   </script>
 </body>
 </html>
+
