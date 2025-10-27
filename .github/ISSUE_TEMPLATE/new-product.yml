@@ -1,0 +1,67 @@
+name: New Product
+description: Add a new product to the website
+title: "[Product]: "
+labels: ["product"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Electronics
+        - Fashion
+        - Sports
+        - Beauty
+        - Toys
+        - Home & Living
+        - Pet Supplies
+        - Automotive
+        - Deals
+    validations:
+      required: true
+      
+  - type: input
+    id: name
+    attributes:
+      label: Product Name
+      placeholder: "Enter product name"
+    validations:
+      required: true
+      
+  - type: input
+    id: price
+    attributes:
+      label: Price
+      placeholder: "$99.99"
+    validations:
+      required: true
+      
+  - type: input
+    id: image
+    attributes:
+      label: Image URL
+      placeholder: "https://example.com/image.jpg"
+      
+  - type: input
+    id: rating
+    attributes:
+      label: Rating
+      placeholder: "4.5"
+      
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      placeholder: "Amazon, eBay, etc."
+      
+  - type: input
+    id: link
+    attributes:
+      label: Product Link
+      placeholder: "https://store.com/product"
+      
+  - type: input
+    id: badge
+    attributes:
+      label: Badge
+      placeholder: "Best Seller, Sale, etc."

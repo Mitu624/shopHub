@@ -1,0 +1,63 @@
+name: Process New Products
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  process-product:
+    if: contains(github.event.issue.labels.*.name, 'product')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Process product data
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const issue = context.payload.issue;
+          const issueBody = issue.body;
+          
+          // Parse the issue body to extract product data
+          // This would need custom parsing based on your form structure
+          const productData = {
+            id: issue.number,
+            category: extractField(issueBody, 'category'),
+            name: extractField(issueBody, 'name'),
+            price: extractField(issueBody, 'price'),
+            image: extractField(issueBody, 'image'),
+            rating: extractField(issueBody, 'rating'),
+            source: extractField(issueBody, 'source'),
+            link: extractField(issueBody, 'link'),
+            badge: extractField(issueBody, 'badge'),
+            created: new Date().toISOString()
+          };
+          
+          // Read existing products
+          const fs = require('fs');
+          let products = [];
+          if (fs.existsSync('data/products.json')) {
+            products = JSON.parse(fs.readFileSync('data/products.json', 'utf8')).products;
+          }
+          
+          // Add new product
+          products.push(productData);
+          
+          // Write back to file
+          fs.writeFileSync('data/products.json', JSON.stringify({products}, null, 2));
+          
+          function extractField(body, fieldName) {
+            const regex = new RegExp(`### ${fieldName}[\\s\\S]*?\\n\\s*([^\\n]*)`);
+            const match = body.match(regex);
+            return match ? match[1].trim() : '';
+          }
+          
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/products.json
+        git commit -m "Add product from issue #${{ github.event.issue.number }}" || exit 0
+        git push
