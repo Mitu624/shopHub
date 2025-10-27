@@ -1,7 +1,7 @@
 backend:
   name: github
   branch: main
-  repo: Mitu624/zenithdeal  
+  repo: Mitu624/shopHub  
 
 # Media storage
 media_folder: "images/uploads"
